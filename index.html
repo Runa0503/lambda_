@@ -45,11 +45,13 @@
 
     function populateTable(data) {
         for (var i = 0; i < data.length; i++) {
-            var row = tableBody.append("<tr>");
-            row.append("<td>" + data[i].id + "</td>");
-            row.append("<td>" + data[i].name + "</td>");
-            row.append("<td>" + data[i].age + "</td>");
+            var row = $("<tr>");
+            row.append("<td>" + data[i].Comment + "</td>");
+            row.append("<td>" + data[i].Timestamp + "</td>");
+            row.append("<td>" + data[i].Track + "</td>");
+            row.append("<td>" + data[i].Name + "</td>");
             // 他の列をここに追加
+            tableBody.append(row);
         }
     }
 });
