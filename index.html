@@ -7,14 +7,53 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <h1>Welcome to My Website</h1>
-    <p>This is a simple example of an HTML document.</p>
-    <button type="button" class="btn btn-secondary">Secondary</button>
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-    </ul>
-    <a href="https://www.example.com">Visit Example.com</a>
+
+    <table id="data-table" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <!-- 他の列をここに追加 -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- データ行はここに表示 -->
+        </tbody>
+    </table>
+<script>
+    $(document).ready(function () {
+    var tableBody = $("#data-table tbody");
+    var requestData = {
+        "OperationType": "SCAN"// リクエストデータをここに設定
+    };
+    
+    // Ajaxリクエストを送信
+    $.ajax({
+        url: " https://08ngbptisd.execute-api.us-east-2.amazonaws.com/test_POST",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(requestData),
+        success: function (data) {
+            populateTable(data);
+        },
+        error: function (error) {
+            console.error("データの取得に失敗しました: " + error);
+        }
+    });
+
+    function populateTable(data) {
+        for (var i = 0; i < data.length; i++) {
+            var row = tableBody.append("<tr>");
+            row.append("<td>" + data[i].id + "</td>");
+            row.append("<td>" + data[i].name + "</td>");
+            row.append("<td>" + data[i].age + "</td>");
+            // 他の列をここに追加
+        }
+    }
+});
+
+</script>
+
 </body>
 </html>
