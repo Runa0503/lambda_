@@ -44,8 +44,8 @@
     });
 
 function populateTable(data) {
-    for (var i = 0; i < data.length; i++) {
-        var item = data[i];
+    for (var i = 0; i < data.scanData.Items.length; i++) {
+        var item = data.scanData.Items[i];
         var row = $("<tr>");
 
         // 各データプロパティをセルに追加
