@@ -32,6 +32,10 @@
     $.ajax({
         url: " https://08ngbptisd.execute-api.us-east-2.amazonaws.com/test_POST",
         type: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
         dataType: "json",
         data: JSON.stringify(requestData),
         success: function (data) {
