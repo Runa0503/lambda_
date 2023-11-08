@@ -1,1 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My First Web Page</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <h1>変更・削除</h1>
+    <table id="data-table" border="1">
+        <thead>
+            <tr>
+                <th>track</th>
+                <th>comment</th>
+                <th>name</th>
+                <th>timestamp</th>
+                <th></th>
+                <!-- 他の列をここに追加 -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- データ行はここに表示 -->
+        </tbody>
+    </table>
+<script>
+    $(document).ready(function () {
+    var tableBody = $("#data-table tbody");
+    var requestData = {
+        "OperationType": "SCAN"// リクエストデータをここに設定
+    };
+    
+    // Ajaxリクエストを送信
+    $.ajax({
+        url: "https://08ngbptisd.execute-api.us-east-2.amazonaws.com/test_POST/test",
+        type: "POST",
+        dataType: "json",
+        data: JSON.stringify(requestData),
+        success: function (data) {
+            populateTable(data);
+        },
+        error: function (error) {
+            console.error("データの取得に失敗しました: " + error);
+        }
+    });
+
+function populateTable(data) {
+    for (var i = 0; i < data.scanData.Items.length; i++) {
+        var item = data.scanData.Items[i];
+        var row = $("<tr>");
+
+        // 各データプロパティをセルに追加
+        row.append("<td>" + item.Comment.S + "</td>"); // Commentプロパティ
+        row.append("<td>" + item.Timestamp.N + "</td>"); // Timestampプロパティ
+        row.append("<td>" + item.Track.S + "</td>"); // Trackプロパティ
+        row.append("<td>" + item.Name.S + "</td>"); // Nameプロパティ
+        row.append("<td><button type='button' class='btn btn-secondary'>Secondary</button></td>"); // Nameプロパティ
+
+        // 他の列を追加する場合は、ここに追加
+
+        tableBody.append(row);
+    }
+}
+});
+
+</script>
+
+</body>
+</html>
