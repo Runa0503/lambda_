@@ -50,10 +50,10 @@ function populateTable(data) {
         var row = $("<tr>");
 
         // 各データプロパティをセルに追加
-        row.append("<td>" + item.Comment.S + "</td>"); // Commentプロパティ
-        row.append("<td>" + item.Timestamp.N + "</td>"); // Timestampプロパティ
-        row.append("<td>" + item.Track.S + "</td>"); // Trackプロパティ
-        row.append("<td>" + item.Name.S + "</td>"); // Nameプロパティ
+        row.append("<td>" + item.Track.S + "</td>"); // Commentプロパティ
+        row.append("<td>" + item.Comment.S + "</td>"); // Timestampプロパティ
+        row.append("<td>" + item.Name.S + "</td>"); // Trackプロパティ
+        row.append("<td>" + item.Timestamp.N + "</td>"); // Nameプロパティ
         row.append("<td><button type='button' class='btn btn-secondary'>Secondary</button></td>"); // Nameプロパティ
 
         // 他の列を追加する場合は、ここに追加
