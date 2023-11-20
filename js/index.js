@@ -1,11 +1,11 @@
 //const AWS = require('aws-sdk');
 //const cognitoIdentity = new AWS.CognitoIdentity();
 
-(() => {
+window.onload = function() {
   // ユーザープールの設定
   const poolData = {
-	  UserPoolId: "us-east-2_4Db3DfALw",
-	  ClientId: "312r8a9didcj621ct31dq05teo"
+    UserPoolId: "us-east-2_4Db3DfALw",
+    ClientId: "312r8a9didcj621ct31dq05teo"
   };
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
   const cognitoUser = userPool.getCurrentUser(); // 現在のユーザー
@@ -33,7 +33,7 @@
           }
 
           // 取得した属性情報を連想配列に格納
-          for (i = 0; i < result.length; i++) {
+          for (let i = 0; i < result.length; i++) {
             currentUserData[result[i].getName()] = result[i].getValue();
           }
           document.getElementById("name").innerHTML =
@@ -57,7 +57,8 @@
   } else {
     location.href = "signin.html";
   }
-})();
+};
+
 
 
 /*AWS.config.region = 'us-east-2'; // Region
