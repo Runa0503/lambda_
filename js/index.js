@@ -1,5 +1,5 @@
-const AWS = require('aws-sdk');
-const cognitoIdentity = new AWS.CognitoIdentity();
+//const AWS = require('aws-sdk');
+//const cognitoIdentity = new AWS.CognitoIdentity();
 
 (() => {
   // ユーザープールの設定
