@@ -1,12 +1,13 @@
 (() => {
   // ユーザープールの設定
   const poolData = {
-    UserPoolId: "us-east-2_4Db3DfALw",
-    ClientId: "312r8a9didcj621ct31dq05teo"
+	  UserPoolId: "us-east-2_4Db3DfALw",
+	  ClientId: "312r8a9didcj621ct31dq05teo"
   };
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+  const cognitoUser = userPool.getCurrentUser(); // 現在のユーザー
 
-  const attributeList = [];
+  const currentUserData = {}; // ユーザーの属性情報
 
   // Amazon Cognito 認証情報プロバイダーを初期化します
   AWS.config.region = "us-east-2"; // リージョン
@@ -14,57 +15,47 @@
     IdentityPoolId: "us-east-2:9ee0731a-84ec-4e9a-bddf-6c727ed16167"
   });
 
-  // 「Create Account」ボタン押下時
-  const createAccountBtn = document.getElementById("createAccount");
-  createAccountBtn.addEventListener("click", () => {
-    /**
-     * サインアップ処理。
-     */
-    const username = document.getElementById("email").value;
-    const name = document.getElementById("name").value;
-    const password = document.getElementById('password').value;
-
-    // 何か1つでも未入力の項目がある場合、処理終了
-    const message = document.getElementById("message-span");
-    if (!username | !name | !password) {
-      message.innerHTML = "未入力項目があります。";
-      return false;
-    }
-
-    // ユーザ属性リストの生成
-    const dataName = {
-      Name: "name",
-      Value: name
-    };
-    const dataRole = {
-      Name: "custom:role",
-      Value: "5"
-    };
-    const attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(
-      dataName
-    );
-    const attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute(
-      dataRole
-    );
-
-    attributeList.push(attributeName);
-    attributeList.push(attributeRole);
-
-    // サインアップ処理
-    userPool.signUp(username, password, attributeList, null, (err, result) => {
+  // 現在のユーザーの属性情報を取得・表示する
+  // 現在のユーザー情報が取得できているか？
+  if (cognitoUser != null) {
+    cognitoUser.getSession((err, session) => {
       if (err) {
-        message.innerHTML = err.message;
-        return;
+        console.log(err);
+        location.href = "signin.html";
       } else {
-        // サインアップ成功の場合、アクティベーション画面に遷移する
-        alert(
-          "登録したメールアドレスへアクティベーション用のリンクを送付しました。"
-        );
-        location.href = "index.html";
+        // ユーザの属性を取得
+        cognitoUser.getUserAttributes((err, result) => {
+          if (err) {
+            location.href = "signin.html";
+          }
+
+          // 取得した属性情報を連想配列に格納
+          for (i = 0; i < result.length; i++) {
+            currentUserData[result[i].getName()] = result[i].getValue();
+          }
+          document.getElementById("name").innerHTML =
+            "ようこそ！" + currentUserData["name"] + "さん";
+          document.getElementById("role").innerHTML =
+            "Your Role is " + currentUserData["custom:role"];
+          document.getElementById("email").innerHTML =
+            "Your E-Mail is " + currentUserData["email"];
+
+          // サインアウト処理
+          const signoutButton = document.getElementById("signout");
+          signoutButton.addEventListener("click", event => {
+            cognitoUser.signOut();
+            location.reload();
+          });
+          signoutButton.hidden = false;
+          console.log(currentUserData);
+        });
       }
     });
-  });
+  } else {
+    location.href = "signin.html";
+  }
 })();
+
 
 /*AWS.config.region = 'us-east-2'; // Region
 AWS.config.credentials = new AWS.CognitoIdentityCredentials({
