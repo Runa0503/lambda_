@@ -1,8 +1,8 @@
 (() => {
   // ユーザープールの設定
   const poolData = {
-    UserPoolId: "us-east-2_4Db3DfALw",
-    ClientId: "312r8a9didcj621ct31dq05teo"
+    UserPoolId: "us-east-2_ZbFTPSICT",
+    ClientId: "2gbu9f376htq5psvp8lbimpf5a"
   };
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
@@ -11,7 +11,7 @@
   // Amazon Cognito 認証情報プロバイダーを初期化します
   AWS.config.region = "us-east-2"; // リージョン
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: "us-east-2:9ee0731a-84ec-4e9a-bddf-6c727ed16167"
+    IdentityPoolId: "us-east-2:74d6c027-7793-4093-b740-77e0f2016fb7"
   });
 
   // 「Create Account」ボタン押下時
