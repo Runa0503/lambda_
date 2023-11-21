@@ -4,8 +4,8 @@
 window.onload = function() {
   // ユーザープールの設定
   const poolData = {
-    UserPoolId: "us-east-2_4Db3DfALw",
-    ClientId: "312r8a9didcj621ct31dq05teo"
+    UserPoolId: "us-east-2_ZbFTPSICT",
+    ClientId: "2gbu9f376htq5psvp8lbimpf5a"
   };
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
   const cognitoUser = userPool.getCurrentUser(); // 現在のユーザー
@@ -15,7 +15,7 @@ window.onload = function() {
   // Amazon Cognito 認証情報プロバイダーを初期化します
   AWS.config.region = "us-east-2"; // リージョン
   AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: "us-east-2:9ee0731a-84ec-4e9a-bddf-6c727ed16167"
+    IdentityPoolId: "us-east-2:74d6c027-7793-4093-b740-77e0f2016fb7"
   });
 
   // 現在のユーザーの属性情報を取得・表示する
@@ -58,54 +58,3 @@ window.onload = function() {
     location.href = "signin.html";
   }
 };
-
-
-
-/*AWS.config.region = 'us-east-2'; // Region
-AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-    IdentityPoolId: 'us-east-2:9ee0731a-84ec-4e9a-bddf-6c727ed16167',
-});
-  // Initialize the Amazon Cognito credentials provider
-  AWSCognito.config.region = 'us-east-2'; // Region
-  AWSCognito.config.credentials = new AWS.CognitoIdentityCredentials({
-      IdentityPoolId: 'us-east-2:9ee0731a-84ec-4e9a-bddf-6c727ed16167'
-  });
-  var data = { UserPoolId: 'us-east-2_4Db3DfALw',
-                ClientId: '312r8a9didcj621ct31dq05teo',
-                Paranoia : 7
-  };
-
-  var userPool;
-  var cognitoUser;
-
-$("#login-button").click(function(event){	
-    event.preventDefault();
-    var authenticationData = {
-        Username : $('#name').val(),
-        Password : $('#password').val()
-    };
-    var authenticationDetails = new AWSCognito.CognitoIdentityServiceProvider.AuthenticationDetails(authenticationData);
-    userPool = new AWSCognito.CognitoIdentityServiceProvider.CognitoUserPool(data);
-    var userData = {
-        Username : $('#name').val(),
-        Pool : userPool
-       };
-    cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(userData);
-    cognitoUser.authenticateUser(authenticationDetails, {
-        onSuccess: function (authresult) {
-            //console.log('access token + ' + authresult.getIdToken().getJwtToken());
-            
-             var url = "mypage.html";
-
-             $('form').fadeOut(700, function(){
-                $(location).attr("href", url);
-             });
-             $('.wrapper').addClass('form-success'); 
-            
-        },
-        onFailure: function(err) {
-            alert(err.message);
-        },
-    });
-});
-*/
