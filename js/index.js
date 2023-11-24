@@ -4,8 +4,8 @@
 window.onload = function() {
   // ユーザープールの設定
   const poolData = {
-    UserPoolId: "us-east-2_ZbFTPSICT",
-    ClientId: "2gbu9f376htq5psvp8lbimpf5a"
+    UserPoolId: "us-east-2_JmUTcwnbM",
+    ClientId: "3opela6mgkmsattg0hpr6mnr4f"
   };
   const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
   const cognitoUser = userPool.getCurrentUser(); // 現在のユーザー
