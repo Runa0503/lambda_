@@ -37,6 +37,10 @@
       Name: "name",
       Value: name
     };
+    const dataEmail = {
+      Email: "email",
+      Value: email    
+    }
     const dataRole = {
       Name: "custom:role",
       Value: "5"
@@ -45,14 +49,18 @@
       dataName
     );
     const attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute(
+      dataEmail
+    );
+    const attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute(
       dataRole
     );
 
     attributeList.push(attributeName);
+    attributeList.push(attributeEmail);
     attributeList.push(attributeRole);
 
     // サインアップ処理
-    userPool.signUp(username, email, password, attributeList, null, (err, result) => {
+    userPool.signUp(username, password, attributeList, null, (err, result) => {
       if (err) {
         message.innerHTML = err.message;
         return;
