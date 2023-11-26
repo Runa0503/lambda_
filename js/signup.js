@@ -20,13 +20,14 @@
     /**
      * サインアップ処理。
      */
-    const username = document.getElementById("email").value;
+    const username = document.getElementById("userid").value;
+    const email = document.getElementById("email").value;
     const name = document.getElementById("name").value;
     const password = document.getElementById('password').value;
 
     // 何か1つでも未入力の項目がある場合、処理終了
     const message = document.getElementById("message-span");
-    if (!username | !name | !password) {
+    if (!username | !email |!name | !password) {
       message.innerHTML = "未入力項目があります。";
       return false;
     }
