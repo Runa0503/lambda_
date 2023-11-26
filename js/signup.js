@@ -52,7 +52,7 @@
     attributeList.push(attributeRole);
 
     // サインアップ処理
-    userPool.signUp(username, password, attributeList, null, (err, result) => {
+    userPool.signUp(username, email, password, attributeList, null, (err, result) => {
       if (err) {
         message.innerHTML = err.message;
         return;
