@@ -28,7 +28,7 @@
 
     // 認証データの作成
     const authenticationData = {
-      Username: email,
+      Username: username,
       Password: password
     };
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
@@ -36,7 +36,7 @@
     );
 
     const userData = {
-      Username: email,
+      Username: username,
       Pool: userPool
     };
     const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
@@ -94,7 +94,7 @@
 
     // 認証データの作成
     const authenticationData = {
-      Username: email,
+      Username: username,
       Password: password
     };
     const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
@@ -102,7 +102,7 @@
     );
 
     const userData = {
-      Username: email,
+      Username: username,
       Pool: userPool
     };
     const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
