@@ -48,7 +48,7 @@
     const attributeName = new AmazonCognitoIdentity.CognitoUserAttribute(
       dataName
     );
-    const attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute(
+    const attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(
       dataEmail
     );
     const attributeRole = new AmazonCognitoIdentity.CognitoUserAttribute(
