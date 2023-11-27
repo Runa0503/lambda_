@@ -16,7 +16,7 @@
    * サインイン処理
    */
   document.getElementById("signinButton").addEventListener("click", () => {
-    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
     // 何か1つでも未入力の項目がある場合、メッセージを表示して処理を中断
