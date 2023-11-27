@@ -21,7 +21,7 @@
 
     // 何か1つでも未入力の項目がある場合、メッセージを表示して処理を中断
     const message = document.getElementById('message-span');
-    if (!email | !password) {
+    if (!username | !password) {
       message.innerHTML = "All fields are required.";
       return false;
     }
